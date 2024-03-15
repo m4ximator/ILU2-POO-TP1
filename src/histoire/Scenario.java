@@ -25,12 +25,11 @@ public class Scenario {
 		village.ajouterHabitant(obelix);
 		village.ajouterHabitant(druide);
 		village.ajouterHabitant(abraracourcix);
-//		try {
-//			village.afficherVillageois();
-//		} catch (VillageSansChefException e) {
-			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
+		try {
+			village.afficherVillageois();
+		} catch (VillageSansChefException e) {
+			System.out.println("Exception attrapee: "+e.getMessage());
+		}
 
 		System.out.println(village.rechercherVendeursProduit("fleurs"));
 		System.out.println(village.installerVendeur(bonemine, "fleurs", 20));
@@ -45,7 +44,7 @@ public class Scenario {
 			System.out.println(etalFleur.acheterProduit(10, abraracourcix));
 			System.out.println(etalFleur.acheterProduit(15, obelix));
 			System.out.println(etalFleur.acheterProduit(15, assurancetourix));
-		} catch (IllegalArgumentException e) {
+		} catch (Exception e) {
 			System.out.println("Exception attrapée : " + e.getMessage());
 		}
 		System.out.println(village.partirVendeur(bonemine));

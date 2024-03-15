@@ -25,12 +25,11 @@ public class Etal {
 		etalOccupe = true;
 	}
 
-	public String libererEtal() throws NullPointerException {
+	public String libererEtal() {
+		StringBuilder chaine = new StringBuilder();
+		etalOccupe = false;
 		try {
-			if (!etalOccupe)
-				throw new NullPointerException("le vendeur de cet etal est null");
-			etalOccupe = false;
-			StringBuilder chaine = new StringBuilder("Le vendeur " + vendeur.getNom() + " quitte son étal, ");
+			chaine.append("Le vendeur " + vendeur.getNom() + " quitte son étal, ");
 			int produitVendu = quantiteDebutMarche - quantite;
 			if (produitVendu > 0) {
 				chaine.append("il a vendu " + produitVendu + " parmi " + produit + ".\n");
@@ -40,7 +39,7 @@ public class Etal {
 			return chaine.toString();
 		} catch (NullPointerException e) {
 
-			return "Exception : " + e.getMessage();
+			return "Exception attrapee: " + e.getMessage();
 		}
 	}
 
@@ -51,16 +50,14 @@ public class Etal {
 		return "L'etal est libre";
 	}
 
-	public String acheterProduit(int quantiteAcheter, Gaulois acheteur) throws NullPointerException, IllegalArgumentException, IllegalStateException {
-		if(!etalOccupe)
+	public String acheterProduit(int quantiteAcheter, Gaulois acheteur)
+			throws IllegalArgumentException, IllegalStateException {
+		StringBuilder chaine = new StringBuilder();
+		if (!etalOccupe)
 			throw new IllegalStateException("etal vide :(");
-		if (quantite < 1)
-            throw new IllegalArgumentException("La quantité disponible est insuffisante");
+		if (quantiteAcheter < 1)
+			throw new IllegalArgumentException("La quantité disponible est insuffisante");
 		try {
-			if (acheteur == null)
-				throw new NullPointerException();
-			
-			StringBuilder chaine = new StringBuilder();
 			chaine.append(
 					acheteur.getNom() + " veut acheter " + quantiteAcheter + " " + produit + " à " + vendeur.getNom());
 			if (quantite == 0) {
